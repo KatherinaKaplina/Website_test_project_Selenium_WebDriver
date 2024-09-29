@@ -12,7 +12,7 @@ def page(context: BrowserContext):
     return page
 
 
-@pytest.fixture()cd 
+@pytest.fixture()
 def sale_page(page):
     return SalePage(page)
 
