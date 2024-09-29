@@ -1,7 +1,7 @@
 TEST_DATA_CREATE_ACCOUNT = {
-    "first_name": "Kate_101",
-    "last_name": "Test_101",
-    "email": "kate_101@test.test",
+    "first_name": "Kate_10",
+    "last_name": "Test_10",
+    "email": "kate_10@test.test",
     "password": "123QWqw!",
     "confirm_password": "123QWqw!"
 }
@@ -43,3 +43,4 @@ NEGATIVE_DATA_CREATE_ACCOUNT = [
         'confirm_password': ''
     }
 ]
+

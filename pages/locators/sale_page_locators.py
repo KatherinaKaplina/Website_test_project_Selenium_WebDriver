@@ -1,6 +1,7 @@
-sale_header_locator = '//*[@class="page-title"]'
-women_sale_link_locator = '.button'
-women_sale_subtitle_locator = ('//span[@class="info" and contains(text(),'
-                               '"Women’s Deals")]/following-sibling::strong[@class="title"]')
-menu_jacket_women_locator = ('//strong[span[contains(text(),'
-                             '"Women\'s Deals")]]/following-sibling::ul[1]/li/a[text()="Jackets"]')
+from selenium.webdriver.common.by import By
+
+
+sale_header_locator = (By.TAG_NAME, 'h1')
+women_sale_link_locator = (By.CSS_SELECTOR, '.button')
+women_sale_subtitle_locator = (By.XPATH, '//*[@class="title"][1]')
+menu_jacket_women_locator = (By.XPATH, '//a[contains(text(), "Jackets")][1]')

@@ -1,5 +1,5 @@
 import pytest
-from test_UI_kkaplina_playwrite.tests.test_data import (TEST_DATA_CREATE_ACCOUNT, NEGATIVE_DATA_CREATE_ACCOUNT)
+from test_data import (TEST_DATA_CREATE_ACCOUNT, NEGATIVE_DATA_CREATE_ACCOUNT)
 import allure
 
 
