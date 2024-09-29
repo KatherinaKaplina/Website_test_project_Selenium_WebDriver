@@ -1,30 +1,40 @@
-from test_UI_kkaplina_playwrite.pages.base_page import BasePage
-from test_UI_kkaplina_playwrite.pages.locators import eco_friendly_page_locators as loc
-from playwright.sync_api import expect
+from pages.base_page import BasePage
+from pages.locators import eco_friendly_page_locators as loc
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.support.ui import Select
 
 
 class EcoFriendlyPage(BasePage):
     page_url = '/collections/eco-friendly.html'
 
     def check_compare_first_product(self):
-        self.page.wait_for_load_state("networkidle")
-        first_product = self.find(loc.first_product_locator).nth(0)
-        first_product_name = first_product.text_content().strip()
-        compare_button = self.find(loc.compare_button_locator).nth(0)
-        first_product.hover()
-        compare_button.click()
-        self.page.wait_for_selector(loc.compare_products_sidebar_locator)
-        compare_sidebar = self.find(loc.compare_products_sidebar_locator)
-        expect(compare_sidebar).to_contain_text(first_product_name)
+        first_product = self.find(loc.first_product_locator)
+        compare_button = self.find(loc.compare_button_locator)
+        first_product_name = first_product.text
+
+        ActionChains(self.driver).move_to_element(first_product).click(compare_button).perform()
+
+        WebDriverWait(self.driver, 5).until(
+            EC.visibility_of_element_located(loc.compare_products_sidebar_locator)
+        )
+        assert self.find(loc.compare_products_sidebar_locator).text == first_product_name
 
     def check_empty_cart_message(self, text):
         self.find(loc.cart_locator).click()
-        expect(self.find(loc.cart_dialog_locator)).to_have_text(text)
+        assert self.find(loc.cart_dialog_locator).text == text
 
     def check_sort_by_price(self):
-        sorting_dropdown = self.find(loc.sorting_dropdown_locator).nth(0)
-        sorting_dropdown.select_option(value="price")
-        self.page.wait_for_timeout(2000)
-        prices_list = self.find(loc.product_price_locator).all()
-        prices = [float(price.text_content().strip().replace('$', '').replace(',', '')) for price in prices_list]
+        select = self.find(loc.sorting_dropdown_locator)
+        dropdown = Select(select)
+        dropdown.select_by_value('price')
+        WebDriverWait(self.driver, 10).until(
+            EC.presence_of_all_elements_located(loc.product_price_locator)
+        )
+        prices_list = self.find_all(loc.product_price_locator)
+        prices = []
+        for i in prices_list:
+            price = i.text
+            prices.append(float(price.replace('$', '').replace(',', '')))
         assert prices == sorted(prices)
