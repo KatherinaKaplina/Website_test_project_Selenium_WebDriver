@@ -1,7 +1,7 @@
 import pytest
-from test_website_kkaplina_playwrite.pages.sale_page import SalePage
-from test_website_kkaplina_playwrite.pages.create_account_page import CustomerCreateAccount
-from test_website_kkaplina_playwrite.pages.eco_friendly_page import EcoFriendlyPage
+from test_UI_kkaplina_playwrite.pages.sale_page import SalePage
+from test_UI_kkaplina_playwrite.pages.create_account_page import CustomerCreateAccount
+from test_UI_kkaplina_playwrite.pages.eco_friendly_page import EcoFriendlyPage
 from playwright.sync_api import BrowserContext
 
 

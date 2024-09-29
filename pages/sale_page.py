@@ -1,7 +1,7 @@
-from test_website_kkaplina_playwrite.pages.base_page import BasePage
-from test_website_kkaplina_playwrite.pages.locators import sale_page_locators as loc1
-from test_website_kkaplina_playwrite.pages.locators import women_sale_locators as loc2
-from test_website_kkaplina_playwrite.pages.locators import jackets_page_locators as loc3
+from test_UI_kkaplina_playwrite.pages.base_page import BasePage
+from test_UI_kkaplina_playwrite.pages.locators import sale_page_locators as loc1
+from test_UI_kkaplina_playwrite.pages.locators import women_sale_locators as loc2
+from test_UI_kkaplina_playwrite.pages.locators import jackets_page_locators as loc3
 from playwright.sync_api import expect
 
 

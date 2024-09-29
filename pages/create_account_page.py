@@ -1,6 +1,6 @@
 from playwright.sync_api import expect
-from test_website_kkaplina_playwrite.pages.base_page import BasePage
-from test_website_kkaplina_playwrite.pages.locators import create_account_page_locators as loc
+from test_UI_kkaplina_playwrite.pages.base_page import BasePage
+from test_UI_kkaplina_playwrite.pages.locators import create_account_page_locators as loc
 
 
 class CustomerCreateAccount(BasePage):

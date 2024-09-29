@@ -1,5 +1,5 @@
-from test_website_kkaplina_playwrite.pages.base_page import BasePage
-from test_website_kkaplina_playwrite.pages.locators import eco_friendly_page_locators as loc
+from test_UI_kkaplina_playwrite.pages.base_page import BasePage
+from test_UI_kkaplina_playwrite.pages.locators import eco_friendly_page_locators as loc
 from playwright.sync_api import expect
 
 
