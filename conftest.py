@@ -9,6 +9,7 @@ from pages.eco_friendly_page import EcoFriendlyPage
 def driver():
     options = webdriver.ChromeOptions()
     options.add_argument("--disable-search-engine-choice-screen")
+    options.add_argument('--headless')
     chrome_driver = webdriver.Chrome(options=options)
     return chrome_driver
 
