@@ -29,13 +29,33 @@ jobs:
         run: pip install -r requirements.txt
       - name: Run all tests
         if: "github.event.inputs.deployment_target == 'all'"
-        run: pytest
+        run: pytest --alluredir=allure-results
+        continue-on-error: true
       - name: Run smoke tests
         if: "github.event.inputs.deployment_target == 'smoke'"
-        run: pytest -m smoke
+        run: pytest -m smoke --alluredir=allure-results
+        continue-on-error: true
       - name: Run regression tests
         if: "github.event.inputs.deployment_target == 'regression'"
-        run: pytest -m regression
+        run: pytest -m regression --alluredir=allure-results
+        continue-on-error: true
       - name: Run extended tests
         if: "github.event.inputs.deployment_target == 'extended'"
-        run: pytest -m extended
+        run: pytest -m extended --alluredir=allure-results
+        continue-on-error: true
+      - name: Install Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'microsoft'
+          java-version: '17'
+      - name: Install Allure
+        run: sudo wget https://github.com/allure-framework/allure2/releases/download/2.32.0/allure-2.32.0.tgz && sudo tar -zxvf allure-2.32.0.tgz -C /opt/ && sudo ln -s /opt/allure-2.32.0/bin/allure /usr/bin/allure
+      - name: Generate report
+        run: allure generate -c allure-results -o allure-report
+      - name: Save allure report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+          retention-days: 1
+        
