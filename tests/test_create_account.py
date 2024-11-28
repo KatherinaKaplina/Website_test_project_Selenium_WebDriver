@@ -4,6 +4,7 @@ import allure
 
 
 @allure.title('Create account')
+@pytest.mark.smoke
 def test_create_account_success_message(create_account_page):
     create_account_page.open_page()
     create_account_page.fill_info_create_account(
@@ -18,6 +19,7 @@ def test_create_account_success_message(create_account_page):
 
 
 @allure.title('Message when account is already created')
+@pytest.mark.regression
 def test_already_created_account_message(create_account_page):
     create_account_page.open_page()
     create_account_page.fill_info_create_account(
@@ -34,6 +36,7 @@ def test_already_created_account_message(create_account_page):
 
 
 @allure.title('Required fields test')
+@pytest.mark.extended
 @pytest.mark.parametrize('data', NEGATIVE_DATA_CREATE_ACCOUNT)
 def test_required_field_first_name(create_account_page, data):
     create_account_page.open_page()
