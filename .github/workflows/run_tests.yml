@@ -13,7 +13,12 @@ on:
           - regression
           - extended
           - all
-        
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   run-tests:
     runs-on: ubuntu-latest
