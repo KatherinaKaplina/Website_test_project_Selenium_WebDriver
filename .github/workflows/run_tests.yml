@@ -40,9 +40,24 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.TOKEN }}"
           -H "X-GitHub-Api-Version: 2022-11-28" 
           "https://api.github.com/repos/KatherinaKaplina/Website_test_project_Selenium_WebDriver/actions/artifacts/$ARTEFACT_ID/zip"
-          -o artifacts.zip
+          -o artifacts.zip &&
+           REPORT_ID=$(curl -L -H "Accept: application/vnd.github+json" 
+          -H "X-GitHub-Api-Version: 2022-11-28" 
+          "https://api.github.com/repos/KatherinaKaplina/Website_test_project_Selenium_WebDriver/actions/artifacts?name=github-pages" 
+          | python -c "import sys, json; print(json.load(sys.stdin)['artifacts'][0]['id'])") 
+          && 
+          curl -L 
+          -H "Accept: application/vnd.github+json"
+          -H "Authorization: Bearer ${{ secrets.TOKEN }}"
+          -H "X-GitHub-Api-Version: 2022-11-28" 
+          "https://api.github.com/repos/KatherinaKaplina/Website_test_project_Selenium_WebDriver/actions/artifacts/$REPORT_ID/zip"
+          -o pages.zip
       - name: Unzip artifacts.zip
         run: mkdir allure-results && unzip artifacts.zip -d allure-results
+      - name: Unzip pages.zip
+        run: mkdir old_pages pages_history && unzip pages.zip -d old_pages && tar -xvf old_pages/artifact.tar -C pages_history
+      - name: Copy to allure-results
+        run: cp pages_history/history/* allure-results && cp -r pages_history/history allure-results
       - name: Store allure history
         uses: actions/upload-artifact@v4
         with:
