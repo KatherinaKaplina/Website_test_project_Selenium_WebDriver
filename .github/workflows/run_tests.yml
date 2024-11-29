@@ -84,7 +84,7 @@ jobs:
       - name: Store allure results
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results
+          name: allure-results-$(date +'%Y%m%d%H%M%S')
           path: allure-results
           retention-days: 1
 
