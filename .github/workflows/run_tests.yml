@@ -84,9 +84,10 @@ jobs:
       - name: Store allure results
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results-$(date +'%Y%m%d%H%M%S')
+          name: allure-results
           path: allure-results
           retention-days: 1
+          overwrite: true
 
   generate-report:
     name: Generate report
